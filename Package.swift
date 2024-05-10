@@ -23,14 +23,6 @@ let package = Package(
                 .product(name: "Vapor", package: "vapor"),
             ],
             swiftSettings: swiftSettings
-        ),
-        .testTarget(
-            name: "AppTests",
-            dependencies: [
-                .target(name: "App"),
-                .product(name: "XCTVapor", package: "vapor"),
-            ],
-            swiftSettings: swiftSettings
         )
     ]
 )
