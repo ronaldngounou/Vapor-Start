@@ -2,7 +2,6 @@ import NIOSSL
 import Fluent
 import FluentPostgresDriver
 import Vapor
-
 // configures your application
 public func configure(_ app: Application) async throws {
     // uncomment to serve files from /Public folder
@@ -16,8 +15,13 @@ public func configure(_ app: Application) async throws {
         database: Environment.get("DATABASE_NAME") ?? "vapor_database",
         tls: .prefer(try .init(configuration: .clientDefault)))
     ), as: .psql)
-
-    app.migrations.add(CreateTodo())
+    
+    // add migration for our CreateSongs
+    app.migrations.add(CreateSongs())
+    
+    try app.autoMigrate().wait()
+    
+    
     // register routes
     try routes(app)
 }
